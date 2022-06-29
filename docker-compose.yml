@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  application:
+    container_name: prod-cat_app
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - DB_USER=mariana
+      - DB_HOST=db
+      - DB_PASSWORD=12345678
+      - DB=products_management
+      - DB_PORT=5432
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/app
+
+  db:
+    container_name: db
+    image: postgres:14
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=mariana
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_DB=products_management
+    volumes:
+      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mariana -d products_management"]
+      interval: 1s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
