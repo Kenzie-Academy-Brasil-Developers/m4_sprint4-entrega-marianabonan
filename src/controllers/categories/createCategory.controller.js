@@ -5,6 +5,7 @@ export async function createCategoryController(request, response) {
     const { name } = request.body;
 
     const creatingCategory = await createCategoryService(name);
+
     return response
       .status(201)
       .json({ message: "Category created", category: creatingCategory });

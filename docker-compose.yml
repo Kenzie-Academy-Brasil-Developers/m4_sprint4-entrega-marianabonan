@@ -18,6 +18,18 @@ services:
     volumes:
       - .:/app
 
+  db-test:
+    container_name: prod_categ_tests
+    image: postgres:14
+    ports:
+      - 5234:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=tests_products
+    volumes:
+      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
   db:
     container_name: db
     image: postgres:14
