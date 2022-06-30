@@ -6,10 +6,7 @@ export default async function deleteCategoryService(id) {
       `DELETE FROM categories WHERE id = $1 RETURNING *;`,
       [id]
     );
-    return {
-      message: "Category deleted",
-      category: response.rows[0],
-    };
+    return response.rows[0];
   } catch (error) {
     throw new Error(error);
   }
