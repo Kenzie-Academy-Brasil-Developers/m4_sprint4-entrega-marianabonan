@@ -7,7 +7,7 @@ export default async function deleteProductController(request, response) {
 
     return response.status(204).json({ message: "Product deleted!", product });
   } catch (error) {
-    return response.status(404).json({
+    return response.status(400).json({
       status: "Error",
       message: error.message,
     });

@@ -12,6 +12,6 @@ export default async function deleteProductService({ id }) {
       category: response.rows[0],
     };
   } catch (error) {
-    throw newError(error);
+    throw new Error(error);
   }
 }

@@ -11,6 +11,7 @@ export default async function updateProductController(request, response) {
       product: update,
     });
   } catch (error) {
+    console.log(error.message);
     return response.status(400).json({
       message: error.message,
     });

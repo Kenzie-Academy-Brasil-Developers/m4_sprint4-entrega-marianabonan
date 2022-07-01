@@ -5,10 +5,8 @@ export default async function updateProductService(data, id) {
     const foundId = await database.query("SELECT * FROM products WHERE id=$1", [
       id,
     ]);
-    console.log(foundId);
 
     if (foundId.rowCount === 0) {
-      console.log("ana vai tomar banho");
       throw "Id not found";
     }
 
